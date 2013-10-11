@@ -1,7 +1,6 @@
 var gamepadsAvailable = false;
 
 $(function () {
-    gamepadsAvailable = Modernizr.gamepads;
-
-
+    gamepadsAvailable = gamepadSupport.init();
+    initializeGame();
 });
