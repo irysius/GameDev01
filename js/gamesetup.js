@@ -24,8 +24,14 @@ function initializeGame() {
     if (frontpage.manifest.length > 0) {
         preload.loadManifest(frontpage.manifest, false);
     }
-
-
+    if (worldpage.manifest.length > 0){
+        preload.loadManifest(worldpage.manifest, false);
+    }
+    if (debugpanel.manifest.length > 0){
+        preload.loadManifest(debugpanel.manifest, false);
+    }
+    //frontpage.isVisible = false;
+    //worldpage.isVisible = false;
 
     preload.load();
 }
@@ -38,7 +44,10 @@ function prepareAssets() {
 
     // call prepare assets from all the pages here.
     frontpage.prepareAssets();
+    worldpage.prepareAssets();
+    debugpanel.prepareAssets();
 
+    console.log('assets prep finished');
     run();
 }
 
@@ -46,7 +55,6 @@ function run(){
     createjs.Ticker.setInterval(window.requestAnimationFrame);
     createjs.Ticker.addEventListener('tick', gameLoop);
 }
-
 
 // picking 4: 3 ratios
 var screenSizes = {

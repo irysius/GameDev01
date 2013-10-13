@@ -40,7 +40,8 @@ var frontpage = {
         var rightY = 0;
         var down = keyboardSupport.keyboardState.KEY_DOWN || keyboardSupport.keyboardState.KEY_S;
         var up = keyboardSupport.keyboardState.KEY_UP || keyboardSupport.keyboardState.KEY_W;
-        if (gamepadSupport.available) {
+
+        if (gamepadSupport.gamepads.length > 0) {
             rightY = gamepadSupport.xboxControllerState.STICK_RIGHT_Y;
         }
 

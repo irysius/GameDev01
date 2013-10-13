@@ -6,6 +6,8 @@ function gameLoop() {
 function draw() {
     // draw all the pages here.
     frontpage.draw();
+    worldpage.draw();
+    debugpanel.draw();
 
     stage.update();
 }
@@ -23,4 +25,6 @@ function update() {
 
     // update all the pages here.
     frontpage.update(elapsedTime);
+    worldpage.update(elapsedTime);
+    debugpanel.update(elapsedTime);
 }

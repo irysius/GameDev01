@@ -3,6 +3,11 @@ var intropage = {
     isEnabled: true,
     manifest: [],
     assetNames:[],
+    update: function(elapsedTime) {
+        if (!intropage.isVisible || !intropage.isEnabled) {
+            return;
+        }
+    },
     draw: function () {
         intropage.drawBase();
         if (!intropage.isVisible) {

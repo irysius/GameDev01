@@ -25,9 +25,9 @@ var keyboardSupport = {
         'KEY_8': 56,
         'KEY_9': 57,
         'KEY_0': 48,
-        'KEY_ENTER' : 0,
-        'KEY_ESC' : 0
-    },
+        'KEY_ENTER': 13,
+        'KEY_ESC': 27
+        },
     pressedKeys: {},
     handleKeyDown: function (e) {
         e = e || window.event;
@@ -38,7 +38,7 @@ var keyboardSupport = {
         delete keyboardSupport.pressedKeys[e.keyCode];
     },
     tick: function(){
-        keyboardSupport.updateState();  
+        keyboardSupport.updateState();
     },
     updateState: function () {
         // Prev State
@@ -69,7 +69,6 @@ var keyboardSupport = {
         keyboardSupport.keyboardStatePrev.KEY_0 = keyboardSupport.keyboardState.KEY_0;
         keyboardSupport.keyboardStatePrev.KEY_ENTER = keyboardSupport.keyboardState.KEY_ENTER;
         keyboardSupport.keyboardStatePrev.KEY_ESC = keyboardSupport.keyboardState.KEY_ESC;
-        
 
         // Curr State
         keyboardSupport.keyboardState.KEY_A = (keyboardSupport.pressedKeys[keyboardSupport.keyEnums['KEY_A']] == true);
@@ -97,8 +96,38 @@ var keyboardSupport = {
         keyboardSupport.keyboardState.KEY_8 = (keyboardSupport.pressedKeys[keyboardSupport.keyEnums['KEY_8']] == true);
         keyboardSupport.keyboardState.KEY_9 = (keyboardSupport.pressedKeys[keyboardSupport.keyEnums['KEY_9']] == true);
         keyboardSupport.keyboardState.KEY_0 = (keyboardSupport.pressedKeys[keyboardSupport.keyEnums['KEY_0']] == true);
-        keyboardSupport.keyboardStatePrev.KEY_ENTER = (keyboardSupport.pressedKeys[keyboardSupport.keyEnums['KEY_ENTER']] == true);
-        keyboardSupport.keyboardStatePrev.KEY_ESC = (keyboardSupport.pressedKeys[keyboardSupport.keyEnums['KEY_ESC']] == true);
+        keyboardSupport.keyboardState.KEY_ENTER = (keyboardSupport.pressedKeys[keyboardSupport.keyEnums['KEY_ENTER']] == true);
+        keyboardSupport.keyboardState.KEY_ESC = (keyboardSupport.pressedKeys[keyboardSupport.keyEnums['KEY_ESC']] == true);
+
+        keyboardSupport.keyboardStateClick.KEY_0 = (keyboardSupport.keyboardStatePrev.KEY_0 && !keyboardSupport.keyboardState.KEY_0);
+        keyboardSupport.keyboardStateClick.KEY_1 = (keyboardSupport.keyboardStatePrev.KEY_1 && !keyboardSupport.keyboardState.KEY_1);
+        keyboardSupport.keyboardStateClick.KEY_2 = (keyboardSupport.keyboardStatePrev.KEY_2 && !keyboardSupport.keyboardState.KEY_2);
+        keyboardSupport.keyboardStateClick.KEY_3 = (keyboardSupport.keyboardStatePrev.KEY_3 && !keyboardSupport.keyboardState.KEY_3);
+        keyboardSupport.keyboardStateClick.KEY_4 = (keyboardSupport.keyboardStatePrev.KEY_4 && !keyboardSupport.keyboardState.KEY_4);
+        keyboardSupport.keyboardStateClick.KEY_5 = (keyboardSupport.keyboardStatePrev.KEY_5 && !keyboardSupport.keyboardState.KEY_5);
+        keyboardSupport.keyboardStateClick.KEY_6 = (keyboardSupport.keyboardStatePrev.KEY_6 && !keyboardSupport.keyboardState.KEY_6);
+        keyboardSupport.keyboardStateClick.KEY_7 = (keyboardSupport.keyboardStatePrev.KEY_7 && !keyboardSupport.keyboardState.KEY_7);
+        keyboardSupport.keyboardStateClick.KEY_8 = (keyboardSupport.keyboardStatePrev.KEY_8 && !keyboardSupport.keyboardState.KEY_8);
+        keyboardSupport.keyboardStateClick.KEY_9 = (keyboardSupport.keyboardStatePrev.KEY_9 && !keyboardSupport.keyboardState.KEY_9);
+        
+        keyboardSupport.keyboardStateClick.KEY_UP = (keyboardSupport.keyboardStatePrev.KEY_UP && !keyboardSupport.keyboardState.KEY_UP);
+        keyboardSupport.keyboardStateClick.KEY_DOWN = (keyboardSupport.keyboardStatePrev.KEY_DOWN && !keyboardSupport.keyboardState.KEY_DOWN);
+        keyboardSupport.keyboardStateClick.KEY_LEFT = (keyboardSupport.keyboardStatePrev.KEY_LEFT && !keyboardSupport.keyboardState.KEY_LEFT);
+        keyboardSupport.keyboardStateClick.KEY_RIGHT = (keyboardSupport.keyboardStatePrev.KEY_RIGHT && !keyboardSupport.keyboardState.KEY_RIGHT);
+        keyboardSupport.keyboardStateClick.KEY_ENTER = (keyboardSupport.keyboardStatePrev.KEY_ENTER && !keyboardSupport.keyboardState.KEY_ENTER);
+        keyboardSupport.keyboardStateClick.KEY_ESC = (keyboardSupport.keyboardStatePrev.KEY_ESC && !keyboardSupport.keyboardState.KEY_ESC);
+        keyboardSupport.keyboardStateClick.KEY_SPACE = (keyboardSupport.keyboardStatePrev.KEY_SPACE && !keyboardSupport.keyboardState.KEY_SPACE);
+
+        keyboardSupport.keyboardStateClick.KEY_Q = (keyboardSupport.keyboardStatePrev.KEY_Q && !keyboardSupport.keyboardState.KEY_Q);
+        keyboardSupport.keyboardStateClick.KEY_W = (keyboardSupport.keyboardStatePrev.KEY_W && !keyboardSupport.keyboardState.KEY_W);
+        keyboardSupport.keyboardStateClick.KEY_E = (keyboardSupport.keyboardStatePrev.KEY_E && !keyboardSupport.keyboardState.KEY_E);
+        keyboardSupport.keyboardStateClick.KEY_R = (keyboardSupport.keyboardStatePrev.KEY_R && !keyboardSupport.keyboardState.KEY_R);
+        keyboardSupport.keyboardStateClick.KEY_A = (keyboardSupport.keyboardStatePrev.KEY_A && !keyboardSupport.keyboardState.KEY_A);
+        keyboardSupport.keyboardStateClick.KEY_S = (keyboardSupport.keyboardStatePrev.KEY_S && !keyboardSupport.keyboardState.KEY_S);
+        keyboardSupport.keyboardStateClick.KEY_D = (keyboardSupport.keyboardStatePrev.KEY_D && !keyboardSupport.keyboardState.KEY_D);
+        keyboardSupport.keyboardStateClick.KEY_Z = (keyboardSupport.keyboardStatePrev.KEY_Z && !keyboardSupport.keyboardState.KEY_Z);
+        keyboardSupport.keyboardStateClick.KEY_X = (keyboardSupport.keyboardStatePrev.KEY_X && !keyboardSupport.keyboardState.KEY_X);
+        keyboardSupport.keyboardStateClick.KEY_C = (keyboardSupport.keyboardStatePrev.KEY_C && !keyboardSupport.keyboardState.KEY_C);
     },
     keyboardState: {
         KEY_A: false,
@@ -130,6 +159,35 @@ var keyboardSupport = {
         KEY_ESC: false
     },
     keyboardStatePrev: {
+        KEY_A: false,
+        KEY_S: false,
+        KEY_D: false,
+        KEY_W: false,
+        KEY_SPACE: false,
+        KEY_Q: false,
+        KEY_E: false,
+        KEY_R: false,
+        KEY_Z: false,
+        KEY_X: false,
+        KEY_C: false,
+        KEY_DOWN: false,
+        KEY_UP: false,
+        KEY_LEFT: false,
+        KEY_RIGHT: false,
+        KEY_1: false,
+        KEY_2: false,
+        KEY_3: false,
+        KEY_4: false,
+        KEY_5: false,
+        KEY_6: false,
+        KEY_7: false,
+        KEY_8: false,
+        KEY_9: false,
+        KEY_0: false,
+        KEY_ENTER: false,
+        KEY_ESC: false
+    },
+    keyboardStateClick: {
         KEY_A: false,
         KEY_S: false,
         KEY_D: false,
