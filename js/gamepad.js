@@ -57,6 +57,34 @@ var gamepadSupport = {
     updateState: function (gamepadId) {
         var gamepad = gamepadSupport.gamepads[gamepadId];
         if (gamepad.id == 'Xbox 360 Controller (XInput STANDARD GAMEPAD)') {
+            // Prev State
+            // Buttons
+            gamepadSupport.xboxControllerStatePrev.BTN_X = gamepadSupport.xboxControllerState.BTN_X;
+            gamepadSupport.xboxControllerStatePrev.BTN_Y = gamepadSupport.xboxControllerState.BTN_Y;
+            gamepadSupport.xboxControllerStatePrev.BTN_A = gamepadSupport.xboxControllerState.BTN_A;
+            gamepadSupport.xboxControllerStatePrev.BTN_B = gamepadSupport.xboxControllerState.BTN_B;
+            gamepadSupport.xboxControllerStatePrev.BTN_UP = gamepadSupport.xboxControllerState.BTN_UP;
+            gamepadSupport.xboxControllerStatePrev.BTN_DOWN = gamepadSupport.xboxControllerState.BTN_DOWN;
+            gamepadSupport.xboxControllerStatePrev.BTN_LEFT = gamepadSupport.xboxControllerState.BTN_LEFT;
+            gamepadSupport.xboxControllerStatePrev.BTN_RIGHT = gamepadSupport.xboxControllerState.BTN_RIGHT;
+            gamepadSupport.xboxControllerStatePrev.SHOULDER_LEFT = gamepadSupport.xboxControllerState.SHOULDER_LEFT;
+            gamepadSupport.xboxControllerStatePrev.SHOULDER_RIGHT = gamepadSupport.xboxControllerState.SHOULDER_RIGHT;
+            gamepadSupport.xboxControllerStatePrev.BTN_SELECT = gamepadSupport.xboxControllerState.BTN_SELECT;
+            gamepadSupport.xboxControllerStatePrev.BTN_START = gamepadSupport.xboxControllerState.BTN_START
+            gamepadSupport.xboxControllerStatePrev.STICK_LEFT_BTN = gamepadSupport.xboxControllerState.STICK_LEFT_BTN;
+            gamepadSupport.xboxControllerStatePrev.STICK_RIGHT_BTN = gamepadSupport.xboxControllerState.STICK_RIGHT_BTN;
+
+            // Triggers
+            gamepadSupport.xboxControllerStatePrev.TRIGGER_LEFT = gamepadSupport.xboxControllerState.TRIGGER_LEFT;
+            gamepadSupport.xboxControllerStatePrev.TRIGGER_RIGHT = gamepadSupport.xboxControllerState.TRIGGER_RIGHT;
+
+            // Sticks
+            gamepadSupport.xboxControllerStatePrev.STICK_LEFT_X = gamepadSupport.xboxControllerState.STICK_LEFT_X;
+            gamepadSupport.xboxControllerStatePrev.STICK_LEFT_Y = gamepadSupport.xboxControllerState.STICK_LEFT_Y;
+            gamepadSupport.xboxControllerStatePrev.STICK_RIGHT_X = gamepadSupport.xboxControllerState.STICK_RIGHT_X;
+            gamepadSupport.xboxControllerStatePrev.STICK_RIGHT_Y = gamepadSupport.xboxControllerState.STICK_RIGHT_Y;
+
+            // Curr State
             // Buttons
             gamepadSupport.xboxControllerState.BTN_X = (gamepad.buttons[2] > gamepadSupport.ANALOGUE_BUTTON_THRESHOLD);
             gamepadSupport.xboxControllerState.BTN_Y = (gamepad.buttons[3] > gamepadSupport.ANALOGUE_BUTTON_THRESHOLD);
@@ -85,6 +113,28 @@ var gamepadSupport = {
         }
     },
     xboxControllerState: {
+        BTN_X: false,
+        BTN_Y: false,
+        BTN_A: false,
+        BTN_B: false,
+        BTN_DOWN: false,
+        BTN_UP: false,
+        BTN_LEFT: false,
+        BTN_RIGHT: false,
+        SHOULDER_LEFT: false,
+        SHOULDER_RIGHT: false,
+        TRIGGER_LEFT: 0,
+        TRIGGER_RIGHT: 0,
+        STICK_LEFT_X: 0,
+        STICK_LEFT_Y: 0,
+        STICK_LEFT_BTN: false,
+        STICK_RIGHT_X: 0,
+        STICK_RIGHT_Y: 0,
+        STICK_RIGHT_BTN: false,
+        BTN_START: false,
+        BTN_SELECT: false
+    },
+    xboxControllerStatePrev: {
         BTN_X: false,
         BTN_Y: false,
         BTN_A: false,

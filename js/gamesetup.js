@@ -1,10 +1,7 @@
 var canvas, stage, preload, background;
-var pressedKeys={};
 
-
-
-var ball_blue;
-var ball_red;
+//var ball_blue;
+//var ball_red;
 
 function initializeGame() {
     console.log('initializing game.');
@@ -15,17 +12,22 @@ function initializeGame() {
     preload = new createjs.LoadQueue(true);
     preload.installPlugin(createjs.Sound);
     preload.addEventListener('complete', prepareAssets);
-    this.document.onkeydown = handleKeyDown;
-    this.document.onkeyup = handleKeyUp;
+    this.document.onkeydown = keyboardSupport.handleKeyDown;
+    this.document.onkeyup = keyboardSupport.handleKeyUp;
+    var gamepadsAvailable = gamepadSupport.init();
+
     $(window).resize(function () {
         redrawAssets();
     });
 
-    var manifest = [
-        { id: 'ballImage', src: 'img/ball.png' }
-    ];
+    // load all the manifest details from all the pages here.
+    if (frontpage.manifest.length > 0) {
+        preload.loadManifest(frontpage.manifest, false);
+    }
 
-    preload.loadManifest(manifest);
+
+
+    preload.load();
 }
 
 function prepareAssets() {
@@ -34,12 +36,8 @@ function prepareAssets() {
     background.graphics.beginFill('#93CCEA').drawRect(0, 0, standardWidth, standardHeight);
     stage.addChild(background);
 
-    prepareVectors();
-    prepareBitmaps();
-    prepareAnimations();
-
-    stage.addChild(ball_blue);
-    stage.addChild(ball_red);
+    // call prepare assets from all the pages here.
+    frontpage.prepareAssets();
 
     run();
 }
@@ -49,18 +47,6 @@ function run(){
     createjs.Ticker.addEventListener('tick', gameLoop);
 }
 
-function prepareBitmaps() {
-    //var ballImage = preload.getResult('ballImage');
-    //ballBitmap = new createjs.Bitmap(ballImage);
-}
-function prepareVectors() {
-    ball_blue = new createjs.Shape();
-    ball_blue.graphics.beginFill('#0000FF').drawCircle(0, 0, 10);
-    ball_red = new createjs.Shape();
-    ball_red.graphics.beginFill('#FF0000').drawCircle(0, 0, 10);
-}
-function prepareAnimations() { 
-}
 
 // picking 4: 3 ratios
 var screenSizes = {
@@ -102,14 +88,4 @@ function redrawAssets() {
         child.scaleX = ss.scale;
         child.scaleY = ss.scale;
     }
-}
-
-function handleKeyDown(e){
-     e = e || window.event;
-     pressedKeys[e.keyCode] = true;
-}
-
-function handleKeyUp(e){
-     e = e || window.event;
-     delete pressedKeys[e.keyCode];
 }
