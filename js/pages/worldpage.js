@@ -10,7 +10,6 @@ var worldpage = {
         'stage5circle',
         'stage6circle'
     ],
-    modalRectangle: null,
     prepareAssets: function () {
         // this will be called by the game engine, so add loaded assets to the stage.
         var stage1circle = new createjs.Shape();
@@ -32,41 +31,46 @@ var worldpage = {
         stage6circle.graphics.beginFill('#FF0000').drawCircle(530, 300, 30);
         stage6circle.name = 'stage6circle';
 
-        var ss = screenSizes[screenSize];
-        worldpage.modalRectangle = new createjs.Rectangle((ss.width - 640) / 2, (ss.height - 480) / 2, 640, 480);
+        var modalRectangle = new createjs.Rectangle(
+            (game.screenSize.width - 640) / 2,
+            (game.screenSize.height - 480) / 2,
+            640,
+            480);
 
         var modalBackground = new createjs.Shape();
         modalBackground.graphics.beginFill('#888888').drawRect(
-            worldpage.modalRectangle.x,
-            worldpage.modalRectangle.y,
-            worldpage.modalRectangle.width,
-            worldpage.modalRectangle.height);
+            modalRectangle.x,
+            modalRectangle.y,
+            modalRectangle.width,
+            modalRectangle.height);
         modalBackground.name = 'modalBackground';
 
         var modalText = new createjs.Text('Are You Sure?', '32px Arial', '#000000');
-        modalText.x = worldpage.modalRectangle.x + worldpage.modalRectangle.width / 2 - modalText.getMeasuredWidth() / 2;
-        modalText.y = worldpage.modalRectangle.y + 10;
+        modalText.x = modalRectangle.x + modalRectangle.width / 2 - modalText.getMeasuredWidth() / 2;
+        modalText.y = modalRectangle.y + 10;
         modalText.name = 'modalText';
         var modalConfirm = new createjs.Text('Confirm', '32px Arial', '#000000');
-        modalConfirm.x = worldpage.modalRectangle.x + 10;
-        modalConfirm.y = worldpage.modalRectangle.y + worldpage.modalRectangle.height - (modalConfirm.getMeasuredHeight() + 10);
+        modalConfirm.x = modalRectangle.x + 10;
+        modalConfirm.y = modalRectangle.y + modalRectangle.height - (modalConfirm.getMeasuredHeight() + 10);
         modalConfirm.name = 'modalConfirm';
         var modalDeny = new createjs.Text('Deny', '32px Arial', '#000000');
-        modalDeny.x = worldpage.modalRectangle.x + worldpage.modalRectangle.width - (modalDeny.getMeasuredWidth() + 10);
-        modalDeny.y = worldpage.modalRectangle.y + worldpage.modalRectangle.height - (modalDeny.getMeasuredHeight() + 10);
+        modalDeny.x = modalRectangle.x + modalRectangle.width - (modalDeny.getMeasuredWidth() + 10);
+        modalDeny.y = modalRectangle.y + modalRectangle.height - (modalDeny.getMeasuredHeight() + 10);
         modalDeny.name = 'modalDeny';
 
-        stage.addChild(stage1circle);
-        stage.addChild(stage2circle);
-        stage.addChild(stage3circle);
-        stage.addChild(stage4circle);
-        stage.addChild(stage5circle);
-        stage.addChild(stage6circle);
+        game.stage.addChild(stage1circle);
+        game.stage.addChild(stage2circle);
+        game.stage.addChild(stage3circle);
+        game.stage.addChild(stage4circle);
+        game.stage.addChild(stage5circle);
+        game.stage.addChild(stage6circle);
 
-        stage.addChild(modalBackground);
-        stage.addChild(modalText);
-        stage.addChild(modalDeny);
-        stage.addChild(modalConfirm);
+        game.stage.addChild(modalBackground);
+        game.stage.addChild(modalText);
+        game.stage.addChild(modalDeny);
+        game.stage.addChild(modalConfirm);
+
+        worldpage.resetAllCirclesExcept(worldpage.stageSelection);
     },
     pageState: 0, // 0 normal, 1 confirm selection, -1 back to main page
     stageSelection: 0,
@@ -82,10 +86,6 @@ var worldpage = {
         worldpage.selectionChangeTrackedTime = 0;
     },
     update: function (elapsedTime) {
-        if (!worldpage.isVisible || !worldpage.isEnabled) {
-            return;
-        }
-
         // place all your update code here, including inputs
         // ACTIONS: Left, Right, Select, Confirm, Cancel, and Return to Main Menu
         var left = keyboardSupport.keyboardState.KEY_LEFT || keyboardSupport.keyboardState.KEY_A;
@@ -99,7 +99,7 @@ var worldpage = {
             yes = yes || gamepadSupport.xboxControllerStateClick.BTN_A;
             no = no || gamepadSupport.xboxControllerStateClick.BTN_B;
             left = left || (rightX < -0.9);
-            right = right || (rightX > -0.9);
+            right = right || (rightX > 0.9);
             idle = idle && (-0.2 < rightX && rightX < 0.2);
         }
 
@@ -147,12 +147,12 @@ var worldpage = {
 
     },
     resetAllCirclesExcept: function (stageSelect) {
-        var stage1circle = stage.getChildByName('stage1circle');
-        var stage2circle = stage.getChildByName('stage2circle');
-        var stage3circle = stage.getChildByName('stage3circle');
-        var stage4circle = stage.getChildByName('stage4circle');
-        var stage5circle = stage.getChildByName('stage5circle');
-        var stage6circle = stage.getChildByName('stage6circle');
+        var stage1circle = game.stage.getChildByName('stage1circle');
+        var stage2circle = game.stage.getChildByName('stage2circle');
+        var stage3circle = game.stage.getChildByName('stage3circle');
+        var stage4circle = game.stage.getChildByName('stage4circle');
+        var stage5circle = game.stage.getChildByName('stage5circle');
+        var stage6circle = game.stage.getChildByName('stage6circle');
 
         stage1circle.y = 300;
         stage2circle.y = 300;
@@ -164,6 +164,8 @@ var worldpage = {
         switch (stageSelect) {
             case 0:
                 stage1circle.y = 200;
+                console.log('setting circle 1 to ' + stage1circle.y);
+                console.log('setting circle 3 to ' + stage3circle.y);
                 break;
             case 1:
                 stage2circle.y = 200;
@@ -205,37 +207,41 @@ var worldpage = {
     returnToMain: function () {
     },
     draw: function () {
-        worldpage.drawBase();
-        if (!worldpage.isVisible) {
-            return;
-        }
-
         // place all your resize sensitive drawing manipulation here
-        var modalBackground = stage.getChildByName('modalBackground');
-        var modalText = stage.getChildByName('modalText');
-        var modalDeny = stage.getChildByName('modalDeny');
-        var modalConfirm = stage.getChildByName('modalConfirm');
+        worldpage.drawModal();
+    },
+    drawModal: function () {
+        var modalBackground = game.stage.getChildByName('modalBackground');
+        var modalText = game.stage.getChildByName('modalText');
+        var modalDeny = game.stage.getChildByName('modalDeny');
+        var modalConfirm = game.stage.getChildByName('modalConfirm');
 
         if (worldpage.pageState == 1) {
             modalBackground.alpha = 0.5;
             modalText.alpha = 1;
             modalConfirm.alpha = 1;
             modalDeny.alpha = 1;
+
+            //worldpage.modalRectangle = new createjs.Rectangle(
+            //((ss.width - 640 * ss.scale) / 2),
+            //((ss.height - 480 * ss.scale) / 2),
+            //640 * ss.scale,
+            //480 * ss.scale);
+
+            //modalBackground.x = worldpage.modalRectangle.x;
+            //modalBackground.y = worldpage.modalRectangle.y;
+
+            //modalText.x = worldpage.modalRectangle.x + worldpage.modalRectangle.width / 2 - modalText.getMeasuredWidth() * ss.scale / 2;
+            //modalText.y = worldpage.modalRectangle.y + 10 * ss.scale;
+            //modalConfirm.x = worldpage.modalRectangle.x + 10 * ss.scale;
+            //modalConfirm.y = worldpage.modalRectangle.y + worldpage.modalRectangle.height - (modalConfirm.getMeasuredHeight() + 10) * ss.scale;
+            //modalDeny.x = worldpage.modalRectangle.x + worldpage.modalRectangle.width - (modalDeny.getMeasuredWidth() + 10) * ss.scale;
+            //modalDeny.y = worldpage.modalRectangle.y + worldpage.modalRectangle.height - (modalDeny.getMeasuredHeight() + 10) * ss.scale;
         } else {
             modalBackground.alpha = 0;
             modalText.alpha = 0;
             modalConfirm.alpha = 0;
             modalDeny.alpha = 0;
         }
-    },
-    drawBase: function () {
-        for (an in worldpage.assetNames) {
-            if (worldpage.isVisible) {
-                stage.getChildByName(worldpage.assetNames[an]).alpha = 1;
-            } else {
-                stage.getChildByName(worldpage.assetNames[an]).alpha = 0;
-            }
-        }
-
     }
 };

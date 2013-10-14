@@ -18,42 +18,50 @@ var frontpage = {
     prepareAssets: function () {
         var txtStartPresentation = new createjs.Text("Start Presentation", "48px Arial", "#000000");
         txtStartPresentation.name = 'txtStartPresentation';
-        stage.addChild(txtStartPresentation);
         var txtCredits = new createjs.Text("Credits", "48px Arial", "#000000");
         txtCredits.name = 'txtCredits';
-        stage.addChild(txtCredits);
 
-        var ballImage = preload.getResult('ballImage');
+        txtCredits.x = game.screenSize.width - (txtCredits.getMeasuredWidth() + 50);
+        txtCredits.y = game.screenSize.height - (txtCredits.getMeasuredHeight() + 100);
+        console.log('Credits coords: ' + txtCredits.x + ',' + txtCredits.y);
+
+        txtStartPresentation.x = game.screenSize.width - (txtStartPresentation.getMeasuredWidth() + 50);
+        txtStartPresentation.y = txtCredits.y - (txtStartPresentation.getMeasuredHeight() + 15);
+        console.log('Presentation coords: ' + txtStartPresentation.x + ',' + txtStartPresentation.y);
+
+        var ballImage = game.preload.getResult('ballImage');
         var ballBitmap = new createjs.Bitmap(ballImage);
         ballBitmap.name = 'ballBitmap';
-        stage.addChild(ballBitmap);
 
+        game.stage.addChild(txtStartPresentation);
+        game.stage.addChild(txtCredits);
+        game.stage.addChild(ballBitmap);
     },
-    update: function (elapsedTime) {
+    update: function (elapsedTime) {        
         if (frontpage.selectionChangeThreshold < 0) {
             frontpage.selectionChangeThreshold = 0;
         }
-        if (!frontpage.isVisible || !frontpage.isEnabled) {
-            return;
-        }
 
-        var rightY = 0;
         var down = keyboardSupport.keyboardState.KEY_DOWN || keyboardSupport.keyboardState.KEY_S;
         var up = keyboardSupport.keyboardState.KEY_UP || keyboardSupport.keyboardState.KEY_W;
+        var idle = !down && !up;
 
         if (gamepadSupport.gamepads.length > 0) {
             rightY = gamepadSupport.xboxControllerState.STICK_RIGHT_Y;
+            down = down || (rightY > 0.9);
+            up = up || (rightY < -0.9);
+            idle = idle && (-0.2 < rightY && rightY < 0.2);
         }
 
-        if (-0.2 < rightY && rightY < 0.2 && !down && !up) {
-                frontpage.resetHolding();
-        } else if (rightY > 0.9 || down) {
+        if (idle) {
+            frontpage.resetHolding();
+        } else if (down) {
             if (!frontpage.selectionLocked) {
                 frontpage.moveSelectionDown();
             } else {
                 frontpage.updateHolding(elapsedTime);
             }
-        } else if (rightY < -0.9 || up) {
+        } else if (up) {
             if (!frontpage.selectionLocked) {
                 frontpage.moveSelectionUp();
             } else {
@@ -85,20 +93,9 @@ var frontpage = {
         }
     },
     draw: function () {
-        frontpage.drawBase();
-
-        if (!frontpage.isVisible) {
-            return;
-        }
-        var ss = screenSizes[screenSize];
-
-        var txtStartPresentation = stage.getChildByName('txtStartPresentation');
-        txtStartPresentation.x = ss.width - ((txtStartPresentation.getMeasuredWidth() + 20) * ss.scale);
-        txtStartPresentation.y = ss.height - (220 * ss.scale);
+        var txtStartPresentation = game.stage.getChildByName('txtStartPresentation');
         txtStartPresentation.color = "#000000";
-        var txtCredits = stage.getChildByName('txtCredits');
-        txtCredits.x = ss.width - ((txtCredits.getMeasuredWidth() + 20) * ss.scale);
-        txtCredits.y = ss.height - (150 * ss.scale);
+        var txtCredits = game.stage.getChildByName('txtCredits');
         txtCredits.color = "#000000";
 
         switch (frontpage.currentselection) {
@@ -108,15 +105,6 @@ var frontpage = {
             case 1:
                 txtCredits.color = "#FF0000";
                 break;
-        }
-    },
-    drawBase: function () {
-        for (an in frontpage.assetNames) {
-            if (frontpage.isVisible) {
-                stage.getChildByName(frontpage.assetNames[an]).alpha = 1;
-            } else {
-                stage.getChildByName(frontpage.assetNames[an]).alpha = 0;
-            }
         }
     }
 };
