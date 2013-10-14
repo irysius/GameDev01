@@ -4,6 +4,7 @@ var game = {
     preload: null,
     background: null,
     screenSize: { width: 1024, height: 768, scale: 1 },
+    baseScreenSize: { width: 1024, height: 768, scale: 1},
     pages: [],
     init: function () {
         game.canvas = document.getElementById('main-canvas');

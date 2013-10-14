@@ -1,4 +1,5 @@
 var debugpanel = {
+    name: 'debugpanel',
     isVisible: true,
     isEnabled: true,
     manifest: [],
@@ -22,119 +23,125 @@ var debugpanel = {
     ],
     prepareAssets: function () {
         // this will be called by the game engine, so add loaded assets to the stage.
-        var debugUL1Text = new createjs.Text('ul1', '24px Arial', '#458B00');
-        debugUL1Text.x = 10;
-        debugUL1Text.y = 10;
+        var fontStyle = '24px Arial';
+        var fontColor = '#458B00';
+        var debugUL1Text = new createjs.Text('ul1', fontStyle, fontColor);
+        var debugUL2Text = new createjs.Text('ul2', fontStyle, fontColor);
+        var debugUL3Text = new createjs.Text('ul3', fontStyle, fontColor);
+        var debugUL4Text = new createjs.Text('ul4', fontStyle, fontColor);
         debugUL1Text.name = 'debugUL1Text';
-        var debugUL2Text = new createjs.Text('ul2', '24px Arial', '#458B00');
-        debugUL2Text.x = 10;
-        debugUL2Text.y = debugUL2Text.getMeasuredHeight() + 5 + 10;
         debugUL2Text.name = 'debugUL2Text';
-        var debugUL3Text = new createjs.Text('ul3', '24px Arial', '#458B00');
-        debugUL3Text.x = 10;
-        debugUL3Text.y = (debugUL3Text.getMeasuredHeight() + 5) * 2 + 10;
         debugUL3Text.name = 'debugUL3Text';
-        var debugUL4Text = new createjs.Text('ul4', '24px Arial', '#458B00');
-        debugUL4Text.x = 10;
-        debugUL4Text.y = (debugUL4Text.getMeasuredHeight() + 5) * 3 + 10;
         debugUL4Text.name = 'debugUL4Text';
-        var debugUR1Text = new createjs.Text('ur1', '24px Arial', '#458B00');
-        debugUR1Text.x = screenSizes[screenSize].width - (debugUR1Text.getMeasuredWidth() + 10);
-        debugUR1Text.y = 10;
+
+        var debugUR1Text = new createjs.Text('ur1', fontStyle, fontColor);
+        var debugUR2Text = new createjs.Text('ur2', fontStyle, fontColor);
+        var debugUR3Text = new createjs.Text('ur3', fontStyle, fontColor);
+        var debugUR4Text = new createjs.Text('ur4', fontStyle, fontColor);
         debugUR1Text.name = 'debugUR1Text';
-        var debugUR2Text = new createjs.Text('ur2', '24px Arial', '#458B00');
-        debugUR2Text.x = screenSizes[screenSize].width - (debugUR2Text.getMeasuredWidth() + 10);
-        debugUR2Text.y = debugUR2Text.getMeasuredHeight() + 5 + 10;
         debugUR2Text.name = 'debugUR2Text';
-        var debugUR3Text = new createjs.Text('ur3', '24px Arial', '#458B00');
-        debugUR3Text.x = screenSizes[screenSize].width - (debugUR3Text.getMeasuredWidth() + 10);
-        debugUR3Text.y = (debugUR3Text.getMeasuredHeight() + 5) * 2 + 10;
         debugUR3Text.name = 'debugUR3Text';
-        var debugUR4Text = new createjs.Text('ur4', '24px Arial', '#458B00');
-        debugUR4Text.x = screenSizes[screenSize].width - (debugUR4Text.getMeasuredWidth() + 10);
-        debugUR4Text.y = (debugUR4Text.getMeasuredHeight() + 5) * 3 + 10;
         debugUR4Text.name = 'debugUR4Text';
 
-        var debugBR1Text = new createjs.Text('br1', '24px Arial', '#458B00');
-        debugBR1Text.x = screenSizes[screenSize].width - (debugBR1Text.getMeasuredWidth() + 10);
+        var debugBR1Text = new createjs.Text('br1', fontStyle, fontColor);
+        var debugBR2Text = new createjs.Text('br2', fontStyle, fontColor);
+        var debugBR3Text = new createjs.Text('br3', fontStyle, fontColor);
+        var debugBR4Text = new createjs.Text('br4', fontStyle, fontColor);
         debugBR1Text.name = 'debugBR1Text';
-        var debugBR2Text = new createjs.Text('br2', '24px Arial', '#458B00');
-        debugBR2Text.x = screenSizes[screenSize].width - (debugBR2Text.getMeasuredWidth() + 10);
         debugBR2Text.name = 'debugBR2Text';
-        var debugBR3Text = new createjs.Text('br3', '24px Arial', '#458B00');
-        debugBR3Text.x = screenSizes[screenSize].width - (debugBR3Text.getMeasuredWidth() + 10);
         debugBR3Text.name = 'debugBR3Text';
-        var debugBR4Text = new createjs.Text('br4', '24px Arial', '#458B00');
-        debugBR4Text.x = screenSizes[screenSize].width - (debugBR4Text.getMeasuredWidth() + 10);
         debugBR4Text.name = 'debugBR4Text';
-        var debugBL1Text = new createjs.Text('bl1', '24px Arial', '#458B00');
-        debugBL1Text.x = 10;
+
+        var debugBL1Text = new createjs.Text('bl1', fontStyle, fontColor);
+        var debugBL2Text = new createjs.Text('bl2', fontStyle, fontColor);
+        var debugBL3Text = new createjs.Text('bl3', fontStyle, fontColor);
+        var debugBL4Text = new createjs.Text('bl4', fontStyle, fontColor);
         debugBL1Text.name = 'debugBL1Text';
-        var debugBL2Text = new createjs.Text('bl2', '24px Arial', '#458B00');
-        debugBL2Text.x = 10;
         debugBL2Text.name = 'debugBL2Text';
-        var debugBL3Text = new createjs.Text('bl3', '24px Arial', '#458B00');
-        debugBL3Text.x = 10;
         debugBL3Text.name = 'debugBL3Text';
-        var debugBL4Text = new createjs.Text('bl4', '24px Arial', '#458B00');
-        debugBL4Text.x = 10;
         debugBL4Text.name = 'debugBL4Text';
 
-        debugBR4Text.y = screenSizes[screenSize].height - 10;
-        debugBR3Text.y = screenSizes[screenSize].height - (10 + debugBR3Text.getMeasuredHeight() + 5);
-        debugBR2Text.y = screenSizes[screenSize].height - (10 + (debugBR2Text.getMeasuredHeight() + 5) * 2);
-        debugBR1Text.y = screenSizes[screenSize].height - (10 + (debugBR1Text.getMeasuredHeight() + 5) * 3);
+        debugBL1Text.x = 10;
+        debugBL2Text.x = 10;
+        debugBL3Text.x = 10;
+        debugBL4Text.x = 10;
+        debugUL1Text.x = 10;
+        debugUL2Text.x = 10;
+        debugUL3Text.x = 10;
+        debugUL4Text.x = 10;
 
-        debugBL4Text.y = screenSizes[screenSize].height - 10;
-        debugBL3Text.y = screenSizes[screenSize].height - (10 + debugBL3Text.getMeasuredHeight() + 5);
-        debugBL2Text.y = screenSizes[screenSize].height - (10 + (debugBL2Text.getMeasuredHeight() + 5) * 2);
-        debugBL1Text.y = screenSizes[screenSize].height - (10 + (debugBL1Text.getMeasuredHeight() + 5) * 3);
+        debugUL1Text.y = 10;
+        debugUR1Text.y = 10;
+        debugUL2Text.y = debugUL2Text.getMeasuredHeight() + 5 + 10;
+        debugUR2Text.y = debugUR2Text.getMeasuredHeight() + 5 + 10;
+        debugUL3Text.y = (debugUL3Text.getMeasuredHeight() + 5) * 2 + 10;
+        debugUR3Text.y = (debugUR3Text.getMeasuredHeight() + 5) * 2 + 10;
+        debugUL4Text.y = (debugUL4Text.getMeasuredHeight() + 5) * 3 + 10;
+        debugUR4Text.y = (debugUR4Text.getMeasuredHeight() + 5) * 3 + 10;
 
-        stage.addChild(debugUL1Text);
-        stage.addChild(debugUL2Text);
-        stage.addChild(debugUL3Text);
-        stage.addChild(debugUL4Text);
-        stage.addChild(debugUR1Text);
-        stage.addChild(debugUR2Text);
-        stage.addChild(debugUR3Text);
-        stage.addChild(debugUR4Text);
-        stage.addChild(debugBL1Text);
-        stage.addChild(debugBL2Text);
-        stage.addChild(debugBL3Text);
-        stage.addChild(debugBL4Text);
-        stage.addChild(debugBR1Text);
-        stage.addChild(debugBR2Text);
-        stage.addChild(debugBR3Text);
-        stage.addChild(debugBR4Text);
+        var screenWidth = game.baseScreenSize.width;
+        var screenHeight = game.baseScreenSize.height;
+
+        debugUR1Text.x = screenWidth - (debugUR1Text.getMeasuredWidth() + 10);
+        debugUR2Text.x = screenWidth - (debugUR2Text.getMeasuredWidth() + 10);
+        debugUR3Text.x = screenWidth - (debugUR3Text.getMeasuredWidth() + 10);
+        debugUR4Text.x = screenWidth - (debugUR4Text.getMeasuredWidth() + 10);
+
+        debugBR1Text.y = screenHeight - (10 + (debugBR1Text.getMeasuredHeight() * 4) + 5 * 3);
+        debugBL1Text.y = screenHeight - (10 + (debugBL1Text.getMeasuredHeight() * 4) + 5 * 3);
+        debugBR2Text.y = screenHeight - (10 + (debugBR2Text.getMeasuredHeight() * 3) + 5 * 2);
+        debugBL2Text.y = screenHeight - (10 + (debugBL2Text.getMeasuredHeight() * 3) + 5 * 2);
+        debugBR3Text.y = screenHeight - (10 + (debugBR3Text.getMeasuredHeight() * 2) + 5);
+        debugBL3Text.y = screenHeight - (10 + (debugBL3Text.getMeasuredHeight() * 2) + 5);
+        debugBR4Text.y = screenHeight - (10 + debugBR4Text.getMeasuredHeight());
+        debugBL4Text.y = screenHeight - (10 + debugBL4Text.getMeasuredHeight());
+
+        debugBR1Text.x = screenWidth - (debugBR1Text.getMeasuredWidth() + 10);
+        debugBR2Text.x = screenWidth - (debugBR2Text.getMeasuredWidth() + 10);
+        debugBR3Text.x = screenWidth - (debugBR3Text.getMeasuredWidth() + 10);
+        debugBR4Text.x = screenWidth - (debugBR4Text.getMeasuredWidth() + 10);
+
+        game.stage.addChild(debugUL1Text);
+        game.stage.addChild(debugUL2Text);
+        game.stage.addChild(debugUL3Text);
+        game.stage.addChild(debugUL4Text);
+        game.stage.addChild(debugUR1Text);
+        game.stage.addChild(debugUR2Text);
+        game.stage.addChild(debugUR3Text);
+        game.stage.addChild(debugUR4Text);
+        game.stage.addChild(debugBL1Text);
+        game.stage.addChild(debugBL2Text);
+        game.stage.addChild(debugBL3Text);
+        game.stage.addChild(debugBL4Text);
+        game.stage.addChild(debugBR1Text);
+        game.stage.addChild(debugBR2Text);
+        game.stage.addChild(debugBR3Text);
+        game.stage.addChild(debugBR4Text);
     },
-    qPressed: 0,
-    ePressed: 0,
-    xPressed: 0,
-    yPressed: 0,
-    xLocked: false,
-    yLocked: false,
+    variables: {
+        qPressed: 0,
+        ePressed: 0,
+        xPressed: 0,
+        yPressed: 0
+    },
     update: function (elapsedTime) {
-        if (!debugpanel.isVisible || !debugpanel.isEnabled) {
-            return;
-        }
-
-        var debugUL1Text = stage.getChildByName('debugUL1Text');
-        var debugUL2Text = stage.getChildByName('debugUL2Text');
-        var debugUL3Text = stage.getChildByName('debugUL3Text');
-        var debugUL4Text = stage.getChildByName('debugUL4Text');
-        var debugUR1Text = stage.getChildByName('debugUR1Text');
-        var debugUR2Text = stage.getChildByName('debugUR2Text');
-        var debugUR3Text = stage.getChildByName('debugUR3Text');
-        var debugUR4Text = stage.getChildByName('debugUR4Text');
-
-        var debugBL1Text = stage.getChildByName('debugBL1Text');
-        var debugBL2Text = stage.getChildByName('debugBL2Text');
-        var debugBL3Text = stage.getChildByName('debugBL3Text');
-        var debugBL4Text = stage.getChildByName('debugBL4Text');
-        var debugBR1Text = stage.getChildByName('debugBR1Text');
-        var debugBR2Text = stage.getChildByName('debugBR2Text');
-        var debugBR3Text = stage.getChildByName('debugBR3Text');
-        var debugBR4Text = stage.getChildByName('debugBR4Text');
+        // Obtain reference to all of the debug slots.
+        var debugUL1Text = game.stage.getChildByName('debugUL1Text');
+        var debugUL2Text = game.stage.getChildByName('debugUL2Text');
+        var debugUL3Text = game.stage.getChildByName('debugUL3Text');
+        var debugUL4Text = game.stage.getChildByName('debugUL4Text');
+        var debugUR1Text = game.stage.getChildByName('debugUR1Text');
+        var debugUR2Text = game.stage.getChildByName('debugUR2Text');
+        var debugUR3Text = game.stage.getChildByName('debugUR3Text');
+        var debugUR4Text = game.stage.getChildByName('debugUR4Text');
+        var debugBL1Text = game.stage.getChildByName('debugBL1Text');
+        var debugBL2Text = game.stage.getChildByName('debugBL2Text');
+        var debugBL3Text = game.stage.getChildByName('debugBL3Text');
+        var debugBL4Text = game.stage.getChildByName('debugBL4Text');
+        var debugBR1Text = game.stage.getChildByName('debugBR1Text');
+        var debugBR2Text = game.stage.getChildByName('debugBR2Text');
+        var debugBR3Text = game.stage.getChildByName('debugBR3Text');
+        var debugBR4Text = game.stage.getChildByName('debugBR4Text');
 
         // place all your update code here, including inputs
         debugUL1Text.text = "Prev Enter: " + keyboardSupport.keyboardStatePrev.KEY_ENTER;
@@ -143,12 +150,12 @@ var debugpanel = {
         debugUL4Text.text = "Curr Esc: " + keyboardSupport.keyboardState.KEY_ESC;
 
         if (keyboardSupport.keyboardStateClick.KEY_ENTER) {
-            debugpanel.qPressed++;
-            debugBL1Text.text = "Q: " + debugpanel.qPressed;
+            debugpanel.variables.qPressed++;
+            debugBL1Text.text = "Q: " + debugpanel.variables.qPressed;
         }
         if (keyboardSupport.keyboardStateClick.KEY_ESC) {
-            debugpanel.ePressed++;
-            debugBL2Text.text = "E: " + debugpanel.ePressed;
+            debugpanel.variables.ePressed++;
+            debugBL2Text.text = "E: " + debugpanel.variables.ePressed;
         }
 
         if (gamepadSupport.gamepads.length > 0) {
@@ -161,61 +168,41 @@ var debugpanel = {
             debugBR3Text.text = "Clicked B: " + gamepadSupport.xboxControllerStateClick.BTN_B;
             debugBR4Text.text = "Locked B: " + gamepadSupport.xboxControllerStateLocked.BTN_B;
         }
-
     },
     draw: function () {
-        debugpanel.drawBase();
-        if (!debugpanel.isVisible) {
-            return;
-        }
+        var debugUR1Text = game.stage.getChildByName('debugUR1Text');
+        var debugUR2Text = game.stage.getChildByName('debugUR2Text');
+        var debugUR3Text = game.stage.getChildByName('debugUR3Text');
+        var debugUR4Text = game.stage.getChildByName('debugUR4Text');
+        var debugBL1Text = game.stage.getChildByName('debugBL1Text');
+        var debugBL2Text = game.stage.getChildByName('debugBL2Text');
+        var debugBL3Text = game.stage.getChildByName('debugBL3Text');
+        var debugBL4Text = game.stage.getChildByName('debugBL4Text');
+        var debugBR1Text = game.stage.getChildByName('debugBR1Text');
+        var debugBR2Text = game.stage.getChildByName('debugBR2Text');
+        var debugBR3Text = game.stage.getChildByName('debugBR3Text');
+        var debugBR4Text = game.stage.getChildByName('debugBR4Text');
 
-        // place all your resize sensitive drawing manipulation here
-        var debugUL1Text = stage.getChildByName('debugUL1Text');
-        var debugUL2Text = stage.getChildByName('debugUL2Text');
-        var debugUL3Text = stage.getChildByName('debugUL3Text');
-        var debugUL4Text = stage.getChildByName('debugUL4Text');
-        var debugUR1Text = stage.getChildByName('debugUR1Text');
-        var debugUR2Text = stage.getChildByName('debugUR2Text');
-        var debugUR3Text = stage.getChildByName('debugUR3Text');
-        var debugUR4Text = stage.getChildByName('debugUR4Text');
+        var screenWidth = game.baseScreenSize.width;
+        var screenHeight = game.baseScreenSize.height;
 
-        var debugBL1Text = stage.getChildByName('debugBL1Text');
-        var debugBL2Text = stage.getChildByName('debugBL2Text');
-        var debugBL3Text = stage.getChildByName('debugBL3Text');
-        var debugBL4Text = stage.getChildByName('debugBL4Text');
-        var debugBR1Text = stage.getChildByName('debugBR1Text');
-        var debugBR2Text = stage.getChildByName('debugBR2Text');
-        var debugBR3Text = stage.getChildByName('debugBR3Text');
-        var debugBR4Text = stage.getChildByName('debugBR4Text');
+        debugUR1Text.x = screenWidth - (debugUR1Text.getMeasuredWidth() + 10);
+        debugUR2Text.x = screenWidth - (debugUR2Text.getMeasuredWidth() + 10);
+        debugUR3Text.x = screenWidth - (debugUR3Text.getMeasuredWidth() + 10);
+        debugUR4Text.x = screenWidth - (debugUR4Text.getMeasuredWidth() + 10);
 
-        debugUR1Text.x = screenSizes[screenSize].width - (debugUR1Text.getMeasuredWidth() + 10);
-        debugUR2Text.x = screenSizes[screenSize].width - (debugUR2Text.getMeasuredWidth() + 10);
-        debugUR3Text.x = screenSizes[screenSize].width - (debugUR3Text.getMeasuredWidth() + 10);
-        debugUR4Text.x = screenSizes[screenSize].width - (debugUR4Text.getMeasuredWidth() + 10);
+        debugBR1Text.y = screenHeight - (10 + (debugBR1Text.getMeasuredHeight() * 4) + 5 * 3);
+        debugBL1Text.y = screenHeight - (10 + (debugBL1Text.getMeasuredHeight() * 4) + 5 * 3);
+        debugBR2Text.y = screenHeight - (10 + (debugBR2Text.getMeasuredHeight() * 3) + 5 * 2);
+        debugBL2Text.y = screenHeight - (10 + (debugBL2Text.getMeasuredHeight() * 3) + 5 * 2);
+        debugBR3Text.y = screenHeight - (10 + (debugBR3Text.getMeasuredHeight() * 2) + 5);
+        debugBL3Text.y = screenHeight - (10 + (debugBL3Text.getMeasuredHeight() * 2) + 5);
+        debugBR4Text.y = screenHeight - (10 + debugBR4Text.getMeasuredHeight());
+        debugBL4Text.y = screenHeight - (10 + debugBL4Text.getMeasuredHeight());
 
-        debugBR1Text.x = screenSizes[screenSize].width - (debugBR1Text.getMeasuredWidth() + 10);
-        debugBR2Text.x = screenSizes[screenSize].width - (debugBR2Text.getMeasuredWidth() + 10);
-        debugBR3Text.x = screenSizes[screenSize].width - (debugBR3Text.getMeasuredWidth() + 10);
-        debugBR4Text.x = screenSizes[screenSize].width - (debugBR4Text.getMeasuredWidth() + 10);
-
-        debugBR4Text.y = screenSizes[screenSize].height - (10 + debugBR4Text.getMeasuredHeight() + 5);
-        debugBR3Text.y = screenSizes[screenSize].height - (10 + (debugBR3Text.getMeasuredHeight() + 5) * 2);
-        debugBR2Text.y = screenSizes[screenSize].height - (10 + (debugBR2Text.getMeasuredHeight() + 5) * 3);
-        debugBR1Text.y = screenSizes[screenSize].height - (10 + (debugBR1Text.getMeasuredHeight() + 5) * 4);
-
-        debugBL4Text.y = screenSizes[screenSize].height - (10 + debugBL4Text.getMeasuredHeight() + 5);
-        debugBL3Text.y = screenSizes[screenSize].height - (10 + (debugBL3Text.getMeasuredHeight() + 5) * 2);
-        debugBL2Text.y = screenSizes[screenSize].height - (10 + (debugBL2Text.getMeasuredHeight() + 5) * 3);
-        debugBL1Text.y = screenSizes[screenSize].height - (10 + (debugBL1Text.getMeasuredHeight() + 5) * 4);
-    },
-    drawBase: function () {
-        for (an in debugpanel.assetNames) {
-            if (debugpanel.isVisible) {
-                stage.getChildByName(debugpanel.assetNames[an]).alpha = 1;
-            } else {
-                stage.getChildByName(debugpanel.assetNames[an]).alpha = 0;
-            }
-        }
-
+        debugBR1Text.x = screenWidth - (debugBR1Text.getMeasuredWidth() + 10);
+        debugBR2Text.x = screenWidth - (debugBR2Text.getMeasuredWidth() + 10);
+        debugBR3Text.x = screenWidth - (debugBR3Text.getMeasuredWidth() + 10);
+        debugBR4Text.x = screenWidth - (debugBR4Text.getMeasuredWidth() + 10);
     }
 };

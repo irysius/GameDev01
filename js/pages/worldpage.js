@@ -1,4 +1,5 @@
 var worldpage = {
+    name: 'worldpage',
     isVisible: true,
     isEnabled: true,
     manifest: [],
@@ -84,6 +85,7 @@ var worldpage = {
         worldpage.stageSelection = 0;
         worldpage.selectionLocked = false;
         worldpage.selectionChangeTrackedTime = 0;
+        worldpage.resetAllCirclesExcept(worldpage.stageSelection);
     },
     update: function (elapsedTime) {
         // place all your update code here, including inputs

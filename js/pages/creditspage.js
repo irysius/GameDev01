@@ -1,22 +1,22 @@
 var creditspage = {
+    name: 'creditspage',
     isVisible: true,
     isEnabled: true,
     manifest: [],
-    assetNames:[],
-    draw: function () {
-        creditspage.drawBase();
-        if (!creditspage.isVisible) {
-            return;
-        }
+    assetNames: [],
+    prepareAssets: function () {
+        // this will be called by the game engine, so add loaded assets to the stage.
+
     },
-    drawBase: function () {
-        for (an in creditspage.assetNames) {
-            if (creditspage.isVisible) {
-                stage.getChildByName(creditspage.assetNames[an]).alpha = 1;
-            } else {
-                stage.getChildByName(creditspage.assetNames[an]).alpha = 0;
-            }
-        }
-       
+    reset: function () {
+
+    },
+    update: function (elapsedTime) {
+        // place all your update code here, including inputs
+
+    },
+    draw: function () {
+        // place all your resize sensitive drawing manipulation here
+
     }
 };

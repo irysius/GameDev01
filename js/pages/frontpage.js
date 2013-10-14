@@ -1,4 +1,5 @@
 var frontpage = {
+    name: 'frontpage',
     isVisible: true,
     isEnabled: true,
     currentselection: 0,
@@ -37,7 +38,13 @@ var frontpage = {
         game.stage.addChild(txtCredits);
         game.stage.addChild(ballBitmap);
     },
-    update: function (elapsedTime) {        
+    reset: function () {
+        frontpage.selectionLocked = false;
+        frontpage.selectionChangeTrackedTime = 0;
+        frontpage.selectionChangeThreshold = frontpage.baseSelectionChangeThreshold;
+        frontpage.currentselection = 0;
+    },
+    update: function (elapsedTime) {
         if (frontpage.selectionChangeThreshold < 0) {
             frontpage.selectionChangeThreshold = 0;
         }

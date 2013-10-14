@@ -1,5 +1,5 @@
-var basicpage = {
-    name: 'basicpage',
+var gamepage = {
+    name: 'gamepage',
     isVisible: true,
     isEnabled: true,
     manifest: [],
