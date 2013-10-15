@@ -166,8 +166,6 @@ var worldpage = {
         switch (stageSelect) {
             case 0:
                 stage1circle.y = 200;
-                console.log('setting circle 1 to ' + stage1circle.y);
-                console.log('setting circle 3 to ' + stage3circle.y);
                 break;
             case 1:
                 stage2circle.y = 200;
@@ -223,22 +221,6 @@ var worldpage = {
             modalText.alpha = 1;
             modalConfirm.alpha = 1;
             modalDeny.alpha = 1;
-
-            //worldpage.modalRectangle = new createjs.Rectangle(
-            //((ss.width - 640 * ss.scale) / 2),
-            //((ss.height - 480 * ss.scale) / 2),
-            //640 * ss.scale,
-            //480 * ss.scale);
-
-            //modalBackground.x = worldpage.modalRectangle.x;
-            //modalBackground.y = worldpage.modalRectangle.y;
-
-            //modalText.x = worldpage.modalRectangle.x + worldpage.modalRectangle.width / 2 - modalText.getMeasuredWidth() * ss.scale / 2;
-            //modalText.y = worldpage.modalRectangle.y + 10 * ss.scale;
-            //modalConfirm.x = worldpage.modalRectangle.x + 10 * ss.scale;
-            //modalConfirm.y = worldpage.modalRectangle.y + worldpage.modalRectangle.height - (modalConfirm.getMeasuredHeight() + 10) * ss.scale;
-            //modalDeny.x = worldpage.modalRectangle.x + worldpage.modalRectangle.width - (modalDeny.getMeasuredWidth() + 10) * ss.scale;
-            //modalDeny.y = worldpage.modalRectangle.y + worldpage.modalRectangle.height - (modalDeny.getMeasuredHeight() + 10) * ss.scale;
         } else {
             modalBackground.alpha = 0;
             modalText.alpha = 0;
