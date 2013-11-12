@@ -4,7 +4,7 @@ var game = {
     preload: null,
     background: null,
     screenSize: { width: 1024, height: 768, scale: 1 },
-    baseScreenSize: { width: 1024, height: 768, scale: 1},
+    baseScreenSize: { width: 1024, height: 768, scale: 1 },
     pages: [],
     init: function () {
         game.canvas = document.getElementById('main-canvas');
@@ -14,9 +14,10 @@ var game = {
         game.preload = new createjs.LoadQueue(true);
         game.preload.installPlugin(createjs.Sound);
         game.preload.addEventListener('complete', game.prepareAssets);
-        document.onkeydown = keyboardSupport.handleKeyDown;
-        document.onkeyup = keyboardSupport.handleKeyUp;
-        gamepadSupport.init();
+
+        game.setMouseSupport(true);
+        game.setKeyboardSupport(true);
+        game.setGamePadSupport(true);
 
         $(window).resize(function () {
             game.resizing();
@@ -29,6 +30,46 @@ var game = {
         }
 
         game.preload.load();
+    },
+    setGamePadSupport: function (val) {
+        if (val) gamepadSupport.init();
+        gamepadSupport.enabled = val;
+    },
+    setKeyboardSupport: function (val) {
+        if (val) {
+            document.onkeydown = keyboardSupport.handleKeyDown;
+            document.onkeyup = keyboardSupport.handleKeyUp;
+        } else {
+            document.onkeydown = null;
+            document.onkeyup = null;
+        }
+    },
+    setMouseSupport: function (val) {
+        if (val) {
+            game.stage.addEventListener('stagemousedown', mouseSupport.handleMouseDown);
+            game.stage.addEventListener('stagemousemove', mouseSupport.handleMouseMove);
+            game.stage.addEventListener('stagemouseup', mouseSupport.handleMouseUp);
+
+            // Code from javascriptkit.com
+            var mousewheelevt = (/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel" //FF doesn't recognize mousewheel as of FF3.x
+
+            if (document.attachEvent) //if IE (and Opera depending on user setting)
+                document.attachEvent("on" + mousewheelevt, mouseSupport.handleMouseWheel);
+            else if (document.addEventListener) //WC3 browsers
+                document.addEventListener(mousewheelevt, mouseSupport.handleMouseWheel, false);
+        } else {
+            game.stage.removeEventListener('stagemousedown', mouseSupport.handleMouseDown);
+            game.stage.removeEventListener('stagemousemove', mouseSupport.handleMouseMove);
+            game.stage.removeEventListener('stagemouseup', mouseSupport.handleMouseUp);
+
+            var mousewheelevt = (/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel" //FF doesn't recognize mousewheel as of FF3.x
+
+            if (document.detachEvent) //if IE (and Opera depending on user setting)
+                document.detachEvent("on" + mousewheelevt, mouseSupport.handleMouseWheel);
+            else if (document.removeEventListener) //WC3 browsers
+                document.removeEventListener(mousewheelevt, mouseSupport.handleMouseWheel, false);
+        }
+
     },
     prepareAssets: function () {
         console.log('preparing assets.')
@@ -99,11 +140,14 @@ var game = {
     update: function () {
         var totalTime = createjs.Ticker.getTime();
         var elapsedTime = totalTime - game.prevTime;
-        game.prevTime = createjs.Ticker.getTime();
+        console.log(totalTime + ":" + game.prevTime);
+        game.prevTime = totalTime;
         keyboardSupport.tick();
-        if (gamepadSupport.available) {
-            gamepadSupport.tick();
-        }
+        mouseSupport.tick(elapsedTime);
+        gamepadSupport.tick();
+
+        console.log(mouseSupport.mouseState.WHEEL);
+
 
         for (page in game.pages) {
             if (game.pages[page].isVisible && game.pages[page].isEnabled)

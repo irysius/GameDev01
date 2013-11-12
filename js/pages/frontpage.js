@@ -53,7 +53,7 @@ var frontpage = {
         var up = keyboardSupport.keyboardState.KEY_UP || keyboardSupport.keyboardState.KEY_W;
         var idle = !down && !up;
 
-        if (gamepadSupport.gamepads.length > 0) {
+        if (gamepadSupport.checkExists()) {
             rightY = gamepadSupport.xboxControllerState.STICK_RIGHT_Y;
             down = down || (rightY > 0.9);
             up = up || (rightY < -0.9);

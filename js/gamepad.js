@@ -4,12 +4,18 @@ var gamepadSupport = {
     gamepads: [],
     prevRawGamepadTypes: [],
     prevTimestamps: [],
+    enabled: true,
+    checkExists: function () {
+        return gamepadSupport.gamepads.length > 0 && gamepadSupport.enabled;
+    },
     init: function () {
         gamepadSupport.available = !!navigator.webkitGetGamepads || !!navigator.webkitGamepads;
         return gamepadSupport.available;
     },
     tick: function () {
-        gamepadSupport.pollStatus();
+        if (gamepadSupport.available && gamepadSupport.enabled) {
+            gamepadSupport.pollStatus();
+        }
     },
     pollStatus: function () {
         gamepadSupport.pollGamepads();
@@ -120,144 +126,144 @@ var gamepadSupport = {
             if (gamepadSupport.xboxControllerState.BTN_A && !gamepadSupport.xboxControllerStateLocked.BTN_A)
                 gamepadSupport.xboxControllerStateLocked.BTN_A = true;
             if (!gamepadSupport.xboxControllerState.BTN_A) {
-                if (gamepadSupport.xboxControllerStateLocked.BTN_A) 
+                if (gamepadSupport.xboxControllerStateLocked.BTN_A)
                     gamepadSupport.xboxControllerStateClick.BTN_A = true;
-                else 
+                else
                     gamepadSupport.xboxControllerStateClick.BTN_A = false;
-                
+
                 gamepadSupport.xboxControllerStateLocked.BTN_A = false;
             }
             if (gamepadSupport.xboxControllerState.BTN_B && !gamepadSupport.xboxControllerStateLocked.BTN_B)
                 gamepadSupport.xboxControllerStateLocked.BTN_B = true;
             if (!gamepadSupport.xboxControllerState.BTN_B) {
-                if (gamepadSupport.xboxControllerStateLocked.BTN_B) 
+                if (gamepadSupport.xboxControllerStateLocked.BTN_B)
                     gamepadSupport.xboxControllerStateClick.BTN_B = true;
-                else 
+                else
                     gamepadSupport.xboxControllerStateClick.BTN_B = false;
-                
+
                 gamepadSupport.xboxControllerStateLocked.BTN_B = false;
             }
             if (gamepadSupport.xboxControllerState.BTN_X && !gamepadSupport.xboxControllerStateLocked.BTN_X)
                 gamepadSupport.xboxControllerStateLocked.BTN_X = true;
             if (!gamepadSupport.xboxControllerState.BTN_X) {
-                if (gamepadSupport.xboxControllerStateLocked.BTN_X) 
+                if (gamepadSupport.xboxControllerStateLocked.BTN_X)
                     gamepadSupport.xboxControllerStateClick.BTN_X = true;
-                else 
+                else
                     gamepadSupport.xboxControllerStateClick.BTN_X = false;
-                
+
                 gamepadSupport.xboxControllerStateLocked.BTN_X = false;
             }
             if (gamepadSupport.xboxControllerState.BTN_Y && !gamepadSupport.xboxControllerStateLocked.BTN_Y)
                 gamepadSupport.xboxControllerStateLocked.BTN_Y = true;
             if (!gamepadSupport.xboxControllerState.BTN_Y) {
-                if (gamepadSupport.xboxControllerStateLocked.BTN_Y) 
+                if (gamepadSupport.xboxControllerStateLocked.BTN_Y)
                     gamepadSupport.xboxControllerStateClick.BTN_Y = true;
-                else 
+                else
                     gamepadSupport.xboxControllerStateClick.BTN_Y = false;
-                
+
                 gamepadSupport.xboxControllerStateLocked.BTN_Y = false;
             }
             if (gamepadSupport.xboxControllerState.BTN_UP && !gamepadSupport.xboxControllerStateLocked.BTN_UP)
                 gamepadSupport.xboxControllerStateLocked.BTN_UP = true;
             if (!gamepadSupport.xboxControllerState.BTN_UP) {
-                if (gamepadSupport.xboxControllerStateLocked.BTN_UP) 
+                if (gamepadSupport.xboxControllerStateLocked.BTN_UP)
                     gamepadSupport.xboxControllerStateClick.BTN_UP = true;
-                else 
+                else
                     gamepadSupport.xboxControllerStateClick.BTN_UP = false;
-                
+
                 gamepadSupport.xboxControllerStateLocked.BTN_UP = false;
             }
             if (gamepadSupport.xboxControllerState.BTN_DOWN && !gamepadSupport.xboxControllerStateLocked.BTN_DOWN)
                 gamepadSupport.xboxControllerStateLocked.BTN_DOWN = true;
             if (!gamepadSupport.xboxControllerState.BTN_DOWN) {
-                if (gamepadSupport.xboxControllerStateLocked.BTN_DOWN) 
+                if (gamepadSupport.xboxControllerStateLocked.BTN_DOWN)
                     gamepadSupport.xboxControllerStateClick.BTN_DOWN = true;
-                else 
+                else
                     gamepadSupport.xboxControllerStateClick.BTN_DOWN = false;
-                
+
                 gamepadSupport.xboxControllerStateLocked.BTN_DOWN = false;
             }
             if (gamepadSupport.xboxControllerState.BTN_LEFT && !gamepadSupport.xboxControllerStateLocked.BTN_LEFT)
                 gamepadSupport.xboxControllerStateLocked.BTN_LEFT = true;
             if (!gamepadSupport.xboxControllerState.BTN_LEFT) {
-                if (gamepadSupport.xboxControllerStateLocked.BTN_LEFT) 
+                if (gamepadSupport.xboxControllerStateLocked.BTN_LEFT)
                     gamepadSupport.xboxControllerStateClick.BTN_LEFT = true;
-                else 
+                else
                     gamepadSupport.xboxControllerStateClick.BTN_LEFT = false;
-                
+
                 gamepadSupport.xboxControllerStateLocked.BTN_LEFT = false;
             }
             if (gamepadSupport.xboxControllerState.BTN_RIGHT && !gamepadSupport.xboxControllerStateLocked.BTN_RIGHT)
                 gamepadSupport.xboxControllerStateLocked.BTN_RIGHT = true;
             if (!gamepadSupport.xboxControllerState.BTN_RIGHT) {
-                if (gamepadSupport.xboxControllerStateLocked.BTN_RIGHT) 
+                if (gamepadSupport.xboxControllerStateLocked.BTN_RIGHT)
                     gamepadSupport.xboxControllerStateClick.BTN_RIGHT = true;
-                else 
+                else
                     gamepadSupport.xboxControllerStateClick.BTN_RIGHT = false;
-                
+
                 gamepadSupport.xboxControllerStateLocked.BTN_RIGHT = false;
             }
 
-            
+
             if (gamepadSupport.xboxControllerState.BTN_START && !gamepadSupport.xboxControllerStateLocked.BTN_START)
                 gamepadSupport.xboxControllerStateLocked.BTN_START = true;
             if (!gamepadSupport.xboxControllerState.BTN_START) {
-                if (gamepadSupport.xboxControllerStateLocked.BTN_START) 
+                if (gamepadSupport.xboxControllerStateLocked.BTN_START)
                     gamepadSupport.xboxControllerStateClick.BTN_START = true;
-                else 
+                else
                     gamepadSupport.xboxControllerStateClick.BTN_START = false;
-                
+
                 gamepadSupport.xboxControllerStateLocked.BTN_START = false;
             }
             if (gamepadSupport.xboxControllerState.BTN_SELECT && !gamepadSupport.xboxControllerStateLocked.BTN_SELECT)
                 gamepadSupport.xboxControllerStateLocked.BTN_SELECT = true;
             if (!gamepadSupport.xboxControllerState.BTN_SELECT) {
-                if (gamepadSupport.xboxControllerStateLocked.BTN_SELECT) 
+                if (gamepadSupport.xboxControllerStateLocked.BTN_SELECT)
                     gamepadSupport.xboxControllerStateClick.BTN_SELECT = true;
-                else 
+                else
                     gamepadSupport.xboxControllerStateClick.BTN_SELECT = false;
-                
+
                 gamepadSupport.xboxControllerStateLocked.BTN_SELECT = false;
             }
 
             if (gamepadSupport.xboxControllerState.SHOULDER_LEFT && !gamepadSupport.xboxControllerStateLocked.SHOULDER_LEFT)
                 gamepadSupport.xboxControllerStateLocked.SHOULDER_LEFT = true;
             if (!gamepadSupport.xboxControllerState.SHOULDER_LEFT) {
-                if (gamepadSupport.xboxControllerStateLocked.SHOULDER_LEFT) 
+                if (gamepadSupport.xboxControllerStateLocked.SHOULDER_LEFT)
                     gamepadSupport.xboxControllerStateClick.SHOULDER_LEFT = true;
-                else 
+                else
                     gamepadSupport.xboxControllerStateClick.SHOULDER_LEFT = false;
-                
+
                 gamepadSupport.xboxControllerStateLocked.SHOULDER_LEFT = false;
             }
             if (gamepadSupport.xboxControllerState.SHOULDER_RIGHT && !gamepadSupport.xboxControllerStateLocked.SHOULDER_RIGHT)
                 gamepadSupport.xboxControllerStateLocked.SHOULDER_RIGHT = true;
             if (!gamepadSupport.xboxControllerState.SHOULDER_RIGHT) {
-                if (gamepadSupport.xboxControllerStateLocked.SHOULDER_RIGHT) 
+                if (gamepadSupport.xboxControllerStateLocked.SHOULDER_RIGHT)
                     gamepadSupport.xboxControllerStateClick.SHOULDER_RIGHT = true;
-                else 
+                else
                     gamepadSupport.xboxControllerStateClick.SHOULDER_RIGHT = false;
-                
+
                 gamepadSupport.xboxControllerStateLocked.SHOULDER_RIGHT = false;
             }
             if (gamepadSupport.xboxControllerState.STICK_LEFT_BTN && !gamepadSupport.xboxControllerStateLocked.STICK_LEFT_BTN)
                 gamepadSupport.xboxControllerStateLocked.STICK_LEFT_BTN = true;
             if (!gamepadSupport.xboxControllerState.STICK_LEFT_BTN) {
-                if (gamepadSupport.xboxControllerStateLocked.STICK_LEFT_BTN) 
+                if (gamepadSupport.xboxControllerStateLocked.STICK_LEFT_BTN)
                     gamepadSupport.xboxControllerStateClick.STICK_LEFT_BTN = true;
-                else 
+                else
                     gamepadSupport.xboxControllerStateClick.STICK_LEFT_BTN = false;
-                
+
                 gamepadSupport.xboxControllerStateLocked.STICK_LEFT_BTN = false;
             }
             if (gamepadSupport.xboxControllerState.STICK_RIGHT_BTN && !gamepadSupport.xboxControllerStateLocked.STICK_RIGHT_BTN)
                 gamepadSupport.xboxControllerStateLocked.STICK_RIGHT_BTN = true;
             if (!gamepadSupport.xboxControllerState.STICK_RIGHT_BTN) {
-                if (gamepadSupport.xboxControllerStateLocked.STICK_RIGHT_BTN) 
+                if (gamepadSupport.xboxControllerStateLocked.STICK_RIGHT_BTN)
                     gamepadSupport.xboxControllerStateClick.STICK_RIGHT_BTN = true;
-                else 
+                else
                     gamepadSupport.xboxControllerStateClick.STICK_RIGHT_BTN = false;
-                
+
                 gamepadSupport.xboxControllerStateLocked.STICK_RIGHT_BTN = false;
             }
         }

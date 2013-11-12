@@ -144,29 +144,24 @@ var debugpanel = {
         var debugBR4Text = game.stage.getChildByName('debugBR4Text');
 
         // place all your update code here, including inputs
-        debugUL1Text.text = "Prev Enter: " + keyboardSupport.keyboardStatePrev.KEY_ENTER;
-        debugUL2Text.text = "Curr Enter: " + keyboardSupport.keyboardState.KEY_ENTER;
-        debugUL3Text.text = "Prev Esc: " + keyboardSupport.keyboardStatePrev.KEY_ESC;
-        debugUL4Text.text = "Curr Esc: " + keyboardSupport.keyboardState.KEY_ESC;
+        debugUL1Text.text = "Mouse X: " + mouseSupport.mouseState.X;
+        debugUL2Text.text = "Mouse Y: " + mouseSupport.mouseState.Y;
+        debugUL3Text.text = "Mouse LMB: " + mouseSupport.mouseState.LMB;
+        debugUL4Text.text = "Mouse Click: " + mouseSupport.mouseStateClick.LMB;
 
-        if (keyboardSupport.keyboardStateClick.KEY_ENTER) {
-            debugpanel.variables.qPressed++;
-            debugBL1Text.text = "Q: " + debugpanel.variables.qPressed;
-        }
-        if (keyboardSupport.keyboardStateClick.KEY_ESC) {
-            debugpanel.variables.ePressed++;
-            debugBL2Text.text = "E: " + debugpanel.variables.ePressed;
-        }
+        debugUR1Text.text = "Wheel: " + mouseSupport.mouseState.WHEEL;
+        debugUR2Text.text = "Wheel Delta: " + mouseSupport.mouseState.WHEEL_DELTA;
+        debugUR3Text.text = "";
+        debugUR4Text.text = "";
 
-        if (gamepadSupport.gamepads.length > 0) {
-            debugUR1Text.text = "Prev A: " + gamepadSupport.xboxControllerStatePrev.BTN_A;
-            debugUR2Text.text = "Curr A: " + gamepadSupport.xboxControllerState.BTN_A;
-            debugUR3Text.text = "Prev B: " + gamepadSupport.xboxControllerStatePrev.BTN_B;
-            debugUR4Text.text = "Curr B: " + gamepadSupport.xboxControllerState.BTN_B;
-            debugBR1Text.text = "Clicked A: " + gamepadSupport.xboxControllerStateClick.BTN_A;
-            debugBR2Text.text = "Locked A: " + gamepadSupport.xboxControllerStateLocked.BTN_A;
-            debugBR3Text.text = "Clicked B: " + gamepadSupport.xboxControllerStateClick.BTN_B;
-            debugBR4Text.text = "Locked B: " + gamepadSupport.xboxControllerStateLocked.BTN_B;
+        if (mouseSupport.mouseStateDrag.DRAGGING) {
+            debugBL1Text.text = "Drag Start: " + mouseSupport.mouseStateDrag.BEGIN_X + "," + mouseSupport.mouseStateDrag.BEGIN_Y;
+            debugBL2Text.text = "MOVE: " + mouseSupport.mouseStateDrag.MOVE_DELTA;
+            debugBL3Text.text = "NET: " + mouseSupport.mouseStateDrag.TIME_DELTA;
+            debugBL4Text.text = "Drag End: " + mouseSupport.mouseStateDrag.END_X + "," + mouseSupport.mouseStateDrag.END_Y;
+        } else {
+            debugBL1Text.text = "";
+            debugBL2Text.text = "";
         }
     },
     draw: function () {
