@@ -14,22 +14,44 @@ var worldpage = {
     prepareAssets: function () {
         // this will be called by the game engine, so add loaded assets to the stage.
         var stage1circle = new createjs.Shape();
-        stage1circle.graphics.beginFill('#FF0000').drawCircle(30, 300, 30);
+        stage1circle.graphics.beginFill('#FF0000').drawRect(0, 0, 40, 30);
+        stage1circle.x = 0;
+        stage1circle.y = 300;
         stage1circle.name = 'stage1circle';
+        stage1circle.shape = function () {
+            var x = stage1circle.x;
+            var y = stage1circle.y;
+            return new irysius.Rectangle(x, y, 40, 30);
+        }
         var stage2circle = new createjs.Shape();
-        stage2circle.graphics.beginFill('#FF0000').drawCircle(130, 300, 30);
+        stage2circle.graphics.beginFill('#FF0000').drawCircle(0, 0, 30);
+        stage2circle.x = 130;
+        stage2circle.y = 300;
         stage2circle.name = 'stage2circle';
+        stage2circle.shape = function () {
+            var x = stage2circle.x - stage2circle.regX;
+            var y = stage2circle.y - stage2circle.regY;
+            return new irysius.Circle(x, y, 30);
+        }
         var stage3circle = new createjs.Shape();
-        stage3circle.graphics.beginFill('#FF0000').drawCircle(230, 300, 30);
+        stage3circle.graphics.beginFill('#FF0000').drawCircle(0, 0, 30);
+        stage3circle.x = 230;
+        stage3circle.y = 300;
         stage3circle.name = 'stage3circle';
         var stage4circle = new createjs.Shape();
-        stage4circle.graphics.beginFill('#FF0000').drawCircle(330, 300, 30);
+        stage4circle.graphics.beginFill('#FF0000').drawCircle(0, 0, 30);
+        stage4circle.x = 330;
+        stage4circle.y = 300;
         stage4circle.name = 'stage4circle';
         var stage5circle = new createjs.Shape();
-        stage5circle.graphics.beginFill('#FF0000').drawCircle(430, 300, 30);
+        stage5circle.graphics.beginFill('#FF0000').drawCircle(0, 0, 30);
+        stage5circle.x = 430;
+        stage5circle.y = 300;
         stage5circle.name = 'stage5circle';
         var stage6circle = new createjs.Shape();
-        stage6circle.graphics.beginFill('#FF0000').drawCircle(530, 300, 30);
+        stage6circle.graphics.beginFill('#FF0000').drawCircle(0, 0, 30);
+        stage6circle.x = 530;
+        stage6circle.y = 300;
         stage6circle.name = 'stage6circle';
 
         var modalRectangle = new createjs.Rectangle(

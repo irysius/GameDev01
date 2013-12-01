@@ -140,13 +140,11 @@ var game = {
     update: function () {
         var totalTime = createjs.Ticker.getTime();
         var elapsedTime = totalTime - game.prevTime;
-        console.log(totalTime + ":" + game.prevTime);
+        
         game.prevTime = totalTime;
         keyboardSupport.tick();
         mouseSupport.tick(elapsedTime);
         gamepadSupport.tick();
-
-        console.log(mouseSupport.mouseState.WHEEL);
 
 
         for (page in game.pages) {
