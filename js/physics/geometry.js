@@ -18,6 +18,12 @@ irysius.Circle = function (x, y, radius) {
         getLeft: function () { return _topLeft.x; },
         getRight: function () { return _center.x + _radius; },
         getAABB: function () { return new irysius.Rectangle(_topLeft.x, _topLeft.y, _radius * 2, _radius * 2) },
+        contains: function (pt) {
+            if (!pt) pt = { x: 0, y: 0 };
+            var dx = pt.x - _center.x, dy = pt.y - _center.y;
+            if (dx * dx + dy * dy < _radius * _radius) return true;
+            return false;
+        },
         getType: function () {
             return "circle";
         }
@@ -42,7 +48,18 @@ irysius.Rectangle = function (x, y, width, height) {
         getTopRight: function () { return _topRight; },
         getBottomLeft: function () { return _bottomLeft; },
         getBottomRight: function () { return _bottomRight; },
+        getTop: function () { return _y; },
+        getBottom: function () { return _y + _height; },
+        getLeft: function () { return _x; },
+        getRight: function () { return _x + _width; },
         getAABB: function () { return irysius.Rectangle(_x, _y, _width, _height); },
+        contains: function (pt) {
+            if (!pt) pt = { x: 0, y: 0 };
+            if (_x < pt.x && pt.x < _x + _width &&
+                _y < pt.y && pt.y < _y + _height)
+                return true;
+            return false;
+        },
         getType: function () {
             return "rectangle";
         }
@@ -100,6 +117,14 @@ irysius.RotRect = function (x, y, width, height, regX, regY, rotation) {
             if (br.y < minY) minY = br.y; if (br.y > maxX) maxY = br.y;
 
             return new irysius.Rectangle(minX, minY, maxX - minX, maxY - minY);
+        },
+        contains: function (pt) {
+            if (!pt) pt = { x: 0, y: 0 };
+            var rotated = irysius.Math.rotatePt(_center, pt, -_rotation);
+            if (_x < rotated.x && rotated.x < _x + _width &&
+                _y < rotated.y && rotated.y < _y + _height)
+                return true;
+            return false;
         },
         getType: function () {
             return "rotrect";

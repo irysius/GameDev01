@@ -12,6 +12,19 @@ irysius.Collision = {
     },
     touches: function (o1, o2) {
         
+    },
+    _rectTouchRect: function (r1, r2) {
+        
+    },
+    _rectContainsRect: function (r1, r2) {
+        
+    },
+    _rectIntersectsRect: function (r1, r2) {
+        
+    },
+    _rectCollidesRect: function (r1, r2) {
+        
     }
+
 
 }

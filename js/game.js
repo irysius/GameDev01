@@ -92,6 +92,7 @@ var game = {
     run: function () {
         console.log('game running.');
         createjs.Ticker.setInterval(window.requestAnimationFrame);
+        createjs.Ticker.setFPS(60);
         createjs.Ticker.addEventListener('tick', game.tick);
     },
     resizing: function () {
@@ -137,10 +138,12 @@ var game = {
         game.draw();
     },
     prevTime: 0,
+    fps: 0,
     update: function () {
         var totalTime = createjs.Ticker.getTime();
         var elapsedTime = totalTime - game.prevTime;
-        
+        game.fps = 1000 / elapsedTime >> 0;
+
         game.prevTime = totalTime;
         keyboardSupport.tick();
         mouseSupport.tick(elapsedTime);

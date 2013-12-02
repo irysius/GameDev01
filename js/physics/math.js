@@ -34,7 +34,7 @@ irysius.Math = {
         var a = d % 360;
         if (a < -180) a += 360;
         if (a > 180) a -= 360;
-        return r;
+        return a;
     },
     toRadians: function (a) {
         return a / 180 * Math.PI;
@@ -46,6 +46,6 @@ irysius.Math = {
         var vdelta = this.subV2(ptarget, porigin);
         var _x = Math.cos(radians) * vdelta.x - Math.sin(radians) * vdelta.y;
         var _y = Math.sin(radians) * vdelta.x + Math.cos(radians) * vdelta.y;
-        return this.addV2({ x: _x, y: _y }, vorigin);
+        return this.addV2({ x: _x, y: _y }, porigin);
     }
 }

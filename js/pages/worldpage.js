@@ -14,14 +14,18 @@ var worldpage = {
     prepareAssets: function () {
         // this will be called by the game engine, so add loaded assets to the stage.
         var stage1circle = new createjs.Shape();
-        stage1circle.graphics.beginFill('#FF0000').drawRect(0, 0, 40, 30);
-        stage1circle.x = 0;
-        stage1circle.y = 300;
+        stage1circle.graphics.beginFill('#FF0000').drawRect(0, 0, 100, 50);
+        stage1circle.x = 300;
+        stage1circle.y = 600;
+        stage1circle.rotation = 45;
         stage1circle.name = 'stage1circle';
         stage1circle.shape = function () {
             var x = stage1circle.x;
             var y = stage1circle.y;
-            return new irysius.Rectangle(x, y, 40, 30);
+            var regX = stage1circle.regX;
+            var regY = stage1circle.regY;
+            var rotation = stage1circle.rotation;
+            return new irysius.RotRect(x, y, 100, 50, regX, regY, rotation);
         }
         var stage2circle = new createjs.Shape();
         stage2circle.graphics.beginFill('#FF0000').drawCircle(0, 0, 30);

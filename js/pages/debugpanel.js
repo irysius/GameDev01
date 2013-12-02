@@ -122,7 +122,9 @@ var debugpanel = {
         qPressed: 0,
         ePressed: 0,
         xPressed: 0,
-        yPressed: 0
+        yPressed: 0,
+        minFps: 0,
+        maxFps: 0
     },
     update: function (elapsedTime) {
         // Obtain reference to all of the debug slots.
@@ -151,8 +153,10 @@ var debugpanel = {
 
         debugUR1Text.text = "Wheel: " + mouseSupport.mouseState.WHEEL;
         debugUR2Text.text = "Wheel Delta: " + mouseSupport.mouseState.WHEEL_DELTA;
-        debugUR3Text.text = "";
-        debugUR4Text.text = "";
+        var x = game.stage.getChildByName('stage1circle');
+        var y = game.stage.getChildByName('stage2circle');
+        debugUR3Text.text = "In Rectangle: " + x.shape().contains({ x: mouseSupport.mouseState.X, y: mouseSupport.mouseState.Y });
+        debugUR4Text.text = "In Circle: " + y.shape().contains({ x: mouseSupport.mouseState.X, y: mouseSupport.mouseState.Y });
 
         if (mouseSupport.mouseStateDrag.DRAGGING) {
             debugBL1Text.text = "Drag Start: " + mouseSupport.mouseStateDrag.BEGIN_X + "," + mouseSupport.mouseStateDrag.BEGIN_Y;
@@ -163,6 +167,13 @@ var debugpanel = {
             debugBL1Text.text = "";
             debugBL2Text.text = "";
         }
+
+        if (game.fps < debugpanel.variables.minFps || debugpanel.variables.minFps == 0) debugpanel.variables.minFps = game.fps;
+        if (game.fps > debugpanel.variables.maxFps || debugpanel.variables.maxFps == 0) debugpanel.variables.maxFps = game.fps;
+
+        debugBR1Text.text = "FPS: " + game.fps;
+        debugBR2Text.text = "Min FPS: " + debugpanel.variables.minFps;
+        debugBR3Text.text = "Max FPS: " + debugpanel.variables.maxFps;
     },
     draw: function () {
         var debugUR1Text = game.stage.getChildByName('debugUR1Text');
